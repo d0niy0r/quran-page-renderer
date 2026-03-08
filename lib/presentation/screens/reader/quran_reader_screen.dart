@@ -117,32 +117,29 @@ class _QuranReaderScreenState extends State<QuranReaderScreen> {
     return Column(
       children: [
         Expanded(
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(8, 8, 8, 4),
-            child: Directionality(
-              textDirection: TextDirection.rtl,
-              child: PageView.builder(
-                controller: _pageController,
-                itemCount: provider.totalPages,
-                onPageChanged: provider.setPageIndex,
-                itemBuilder: (context, index) {
-                  final pageNum = provider.pageNumbers[index];
-                  final lines = provider.pageLines[pageNum] ?? {};
-                  final isFirstPage = index == 0;
+          child: Directionality(
+            textDirection: TextDirection.rtl,
+            child: PageView.builder(
+              controller: _pageController,
+              itemCount: provider.totalPages,
+              onPageChanged: provider.setPageIndex,
+              itemBuilder: (context, index) {
+                final pageNum = provider.pageNumbers[index];
+                final lines = provider.pageLines[pageNum] ?? {};
+                final isFirstPage = index == 0;
 
-                  return Directionality(
-                    textDirection: TextDirection.ltr,
-                    child: _buildMushafahPage(
-                      lines: lines,
-                      pageNum: pageNum,
-                      showBismillah: isFirstPage &&
-                          widget.chapter.id != 9 &&
-                          widget.chapter.id != 1,
-                      provider: provider,
-                    ),
-                  );
-                },
-              ),
+                return Directionality(
+                  textDirection: TextDirection.ltr,
+                  child: _buildMushafahPage(
+                    lines: lines,
+                    pageNum: pageNum,
+                    showBismillah: isFirstPage &&
+                        widget.chapter.id != 9 &&
+                        widget.chapter.id != 1,
+                    provider: provider,
+                  ),
+                );
+              },
             ),
           ),
         ),
@@ -181,7 +178,7 @@ class _QuranReaderScreenState extends State<QuranReaderScreen> {
           if (showBismillah) _buildBismillah(),
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.fromLTRB(20, 12, 20, 12),
+              padding: const EdgeInsets.fromLTRB(4, 12, 4, 12),
               child: QuranPageText(
                 lines: lines,
                 pageNumber: pageNum,
